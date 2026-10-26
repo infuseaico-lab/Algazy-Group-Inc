@@ -158,7 +158,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const checks = [
     [form.name, (v) => v.trim().length > 1],
     [form.phone, (v) => v.replace(/\D/g, '').length >= 10],
-    [form.email, (v) => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
+    [form.email, (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
   ];
   const mark = (input, ok) => {
     input.setAttribute('aria-invalid', String(!ok));
@@ -194,7 +194,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
     const body = [
       'Quote request',
-      `Name: ${data.name}`, `Phone: ${data.phone}`, data.email && `Email: ${data.email}`, `Area: ${data.area}`,
+      `Name: ${data.name}`, `Phone: ${data.phone}`, `Email: ${data.email}`, `Area: ${data.area}`,
       `Work: ${data.scope}`, `Layout: ${data.layout}`, `Start: ${data.start}`, `Budget: ${data.budget}`, data.notes && `Notes: ${data.notes}`,
     ].filter(Boolean).join('\n');
     // iOS reads "&body=", Android "?body="; "?&body=" works on both
@@ -213,6 +213,17 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let pastHero = false, atQuote = false;
   const set = () => dock.classList.toggle('is-shown', pastHero && !atQuote);
   dock.classList.add('is-managed');
+  // both labels on one line when they fit; otherwise Call shows only its icon
+  const btns = [...dock.querySelectorAll('.btn')];
+  const tight = () => {
+    dock.classList.remove('is-tight');
+    if (btns.some((b) => b.scrollWidth > b.clientWidth + 1)) dock.classList.add('is-tight');
+  };
+  let dockW = innerWidth;
+  addEventListener('resize', () => { if (innerWidth !== dockW) { dockW = innerWidth; tight(); } });
+  document.fonts?.ready.then(tight);
+  document.fonts?.addEventListener?.('loadingdone', tight);
+  tight();
   new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; set(); }).observe(heroActions);
   new IntersectionObserver(([e]) => { atQuote = e.isIntersecting; set(); }, { rootMargin: '0px 0px -30% 0px' }).observe(quote);
 })();
