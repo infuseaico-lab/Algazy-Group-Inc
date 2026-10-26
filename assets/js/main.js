@@ -35,6 +35,41 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { set(false); btn.focus(); } });
 })();
 
+// Hero headline: two lines at most on phones, whatever the phone's text-size setting. Some phones enlarge
+// text while the page width stays the same, so the headline is measured after it renders (and again when
+// the web font arrives or the width changes) and set to the largest size that fits in two lines.
+(() => {
+  const h = document.querySelector('.hero__title');
+  if (!h) return;
+  const phone = matchMedia('(max-width: 47.99em)');
+  const lines = () => Math.round(h.getBoundingClientRect().height / parseFloat(getComputedStyle(h).lineHeight));
+  let lastW = -1, busy = false;
+  const refit = () => {
+    busy = true;
+    h.style.fontSize = '';
+    if (phone.matches && h.clientWidth > 120 && lines() > 2) {
+      let lo = 18, hi = parseFloat(getComputedStyle(h).fontSize);
+      while (hi - lo > 0.5) {
+        const mid = (lo + hi) / 2;
+        h.style.fontSize = `${mid}px`;
+        if (lines() <= 2) lo = mid; else hi = mid;
+      }
+      h.style.fontSize = `${Math.floor(lo * 2) / 2}px`;
+    }
+    lastW = h.clientWidth;
+    busy = false;
+  };
+  // width changes (rotation, resize) re-fit; the headline's own size changes are the fitter's doing
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(() => { if (!busy && h.clientWidth !== lastW) requestAnimationFrame(refit); }).observe(h);
+  }
+  document.fonts?.addEventListener?.('loadingdone', () => refit());
+  phone.addEventListener?.('change', refit);
+  document.fonts?.load?.(`500 ${getComputedStyle(h).fontSize} "DM Sans"`).then(refit, () => {});
+  document.fonts?.ready.then(refit);
+  refit();
+})();
+
 // Hero: the kitchen crossfades through four modern LA kitchens. Paused when the tab is hidden.
 (() => {
   const imgs = [...document.querySelectorAll('[data-fade] img')];
@@ -120,7 +155,6 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!form) return;
   const status = form.querySelector('[data-status]');
   const send = form.querySelector('[data-send]');
-  const more = form.querySelector('[data-more]');
   const checks = [
     [form.name, (v) => v.trim().length > 1],
     [form.phone, (v) => v.replace(/\D/g, '').length >= 10],
@@ -140,7 +174,6 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     e.preventDefault();
     const bad = checks.filter(([input, ok]) => { const good = ok(input.value); mark(input, good); return !good; });
     if (bad.length) {
-      if (bad[0][0] === form.email && more) more.open = true;
       bad[0][0].focus();
       say('Please check the highlighted field.', 'err');
       return;
