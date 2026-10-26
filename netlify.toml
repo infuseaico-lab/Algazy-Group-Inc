@@ -1,0 +1,10 @@
+# Netlify: hosts the portfolio copy of this site at /projects/algazy-group/
+# (proxied from infusedev.online). noindex, links absolute under the subfolder.
+[build]
+  command = "python3 scripts/build_portfolio.py dist"
+  publish = "dist"
+
+[[redirects]]
+  from = "/"
+  to = "/projects/algazy-group/"
+  status = 302
