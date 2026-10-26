@@ -11,7 +11,7 @@
   <meta property="og:image" content="assets/img/hero-1-1536.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
   <script type="application/ld+json">
@@ -39,6 +39,7 @@
     <a class="link" href="#gallery">Gallery</a>
     <a class="link" href="#areas">Areas</a>
     <a class="link" href="#questions">Questions</a>
+    <a class="link" href="#quote">Get a quote</a>
   </nav>
   <a class="button button--accent bar__call" href="tel:+13239408041"><span class="only-wide">Call&nbsp;</span>(323)&nbsp;940&#8209;8041</a>
 </header>
@@ -55,7 +56,10 @@
     </div>
     <div class="hero__copy">
       <p class="hero__lead">Modern kitchen remodeling for Los Angeles homes, from first sketch to final inspection.</p>
-      <a class="button button--paper hero__action" href="tel:+13239408041">Call (323) 940-8041</a>
+      <div class="hero__actions" data-hero-actions>
+        <a class="button button--accent hero__quote" href="#quote">Request a quote</a>
+        <a class="button button--paper hero__call" href="tel:+13239408041">Call (323) 940-8041</a>
+      </div>
       <h1 class="hero__name" id="hero-title"><span>Algazy</span> <span>Group</span></h1>
     </div>
   </section>
@@ -300,8 +304,8 @@
         </details>
       </div>
       <div class="faq__actions">
-        <a class="button button--accent" href="tel:+13239408041">Call (323) 940-8041</a>
-        <a class="link-plain" href="sms:+13239408041">Or send a text</a>
+        <a class="button button--accent" href="#quote">Request a quote</a>
+        <a class="link-plain" href="tel:+13239408041">Or call (323) 940-8041</a>
       </div>
     </div>
     <div class="faq__media">
@@ -310,28 +314,96 @@
     </div>
   </section>
 
-  <!-- Contact: one card on a photograph of an LA house -->
-  <section class="visit" id="contact" aria-labelledby="visit-title">
-    <img class="visit__img" src="assets/img/contact-1536.webp" srcset="assets/img/contact-800.webp 800w, assets/img/contact-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="A contemporary hillside house at dusk with a lit kitchen behind a glass wall and palm trees" loading="lazy">
+  <!-- Quote: the request form on a photograph of an LA house.
+       Submissions: set data-endpoint on the form to a form service URL (Formspree, Basin, Netlify…)
+       to receive them by email. Left empty, sending opens a text message to (323) 940-8041 with the details. -->
+  <section class="quote" id="quote" aria-labelledby="quote-title">
+    <img class="quote__img" src="assets/img/contact-1536.webp" srcset="assets/img/contact-800.webp 800w, assets/img/contact-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="A contemporary hillside house at dusk with a lit kitchen behind a glass wall and palm trees" loading="lazy">
     <div class="card">
-      <h2 class="card__title" id="visit-title">Plan your kitchen</h2>
-      <p>Tell us where you are and the layout you have. We'll call back to book a visit.</p>
-      <form class="card__form" action="sms:+13239408041" data-sms>
-        <label for="f-area">Area</label>
-        <select class="field" id="f-area" name="area">
-          <option>Hollywood</option><option>Los Feliz</option><option>Silver Lake</option><option>Echo Park</option><option>Hancock Park</option>
-          <option>Beverly Hills</option><option>West Hollywood</option><option>Santa Monica</option><option>Culver City</option><option>Westwood</option>
-          <option>Studio City</option><option>Sherman Oaks</option><option>Encino</option><option>Burbank</option><option>Glendale</option>
-          <option>Pasadena</option><option>South Pasadena</option><option>Highland Park</option><option>Eagle Rock</option><option>Alhambra</option>
-          <option>Somewhere else in LA</option>
-        </select>
-        <label for="f-layout">Kitchen layout</label>
-        <select class="field" id="f-layout" name="layout">
-          <option>Galley</option><option>L-shape</option><option>U-shape</option><option selected>Island</option><option>Not sure yet</option>
-        </select>
-        <a class="button button--accent card__send" href="sms:+13239408041" data-sms-link>Text us these details</a>
+      <h2 class="card__title" id="quote-title">Request a quote</h2>
+      <p class="card__intro">Tell us about the kitchen. We'll call you back to talk it through and book a visit.</p>
+      <form class="qform" id="quote-form" novalidate data-endpoint="">
+        <div class="qform__row">
+          <div class="qform__field">
+            <label for="q-name">Name</label>
+            <input class="field" id="q-name" name="name" type="text" autocomplete="name" required aria-describedby="q-name-err">
+            <p class="qform__err" id="q-name-err" hidden>Please add your name.</p>
+          </div>
+          <div class="qform__field">
+            <label for="q-phone">Phone</label>
+            <input class="field" id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="q-phone-err">
+            <p class="qform__err" id="q-phone-err" hidden>Please add a phone number we can call.</p>
+          </div>
+        </div>
+        <div class="qform__field">
+          <label for="q-email">Email <span class="qform__opt">optional</span></label>
+          <input class="field" id="q-email" name="email" type="email" inputmode="email" autocomplete="email" aria-describedby="q-email-err">
+          <p class="qform__err" id="q-email-err" hidden>That email address doesn't look complete.</p>
+        </div>
+        <fieldset class="qform__choices">
+          <legend>What would you like done?</legend>
+          <label><input type="radio" name="scope" value="Full remodel" checked><span>Full remodel</span></label>
+          <label><input type="radio" name="scope" value="Cabinets and counters"><span>Cabinets and counters</span></label>
+          <label><input type="radio" name="scope" value="New layout"><span>New layout</span></label>
+          <label><input type="radio" name="scope" value="Not sure yet"><span>Not sure yet</span></label>
+        </fieldset>
+        <div class="qform__row">
+          <div class="qform__field">
+            <label for="q-area">Area</label>
+            <select class="field" id="q-area" name="area">
+                <option>Hollywood</option>
+                <option>Los Feliz</option>
+                <option>Silver Lake</option>
+                <option>Echo Park</option>
+                <option>Hancock Park</option>
+                <option>Beverly Hills</option>
+                <option>West Hollywood</option>
+                <option>Santa Monica</option>
+                <option>Culver City</option>
+                <option>Westwood</option>
+                <option>Studio City</option>
+                <option>Sherman Oaks</option>
+                <option>Encino</option>
+                <option>Burbank</option>
+                <option>Glendale</option>
+                <option>Pasadena</option>
+                <option>South Pasadena</option>
+                <option>Highland Park</option>
+                <option>Eagle Rock</option>
+                <option>Alhambra</option>
+                <option>Somewhere else in LA</option>
+            </select>
+          </div>
+          <div class="qform__field">
+            <label for="q-layout">Kitchen layout</label>
+            <select class="field" id="q-layout" name="layout">
+              <option>Galley</option><option>L-shape</option><option>U-shape</option><option>Island</option><option selected>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="qform__row">
+          <div class="qform__field">
+            <label for="q-start">When to start</label>
+            <select class="field" id="q-start" name="start">
+              <option>As soon as possible</option><option selected>In 1 to 3 months</option><option>In 3 to 6 months</option><option>Just planning</option>
+            </select>
+          </div>
+          <div class="qform__field">
+            <label for="q-budget">Budget <span class="qform__opt">optional</span></label>
+            <select class="field" id="q-budget" name="budget">
+              <option selected>Not sure yet</option><option>Under $50,000</option><option>$50,000 to $100,000</option><option>Over $100,000</option>
+            </select>
+          </div>
+        </div>
+        <div class="qform__field">
+          <label for="q-notes">About the kitchen <span class="qform__opt">optional</span></label>
+          <textarea class="field" id="q-notes" name="notes" rows="3" placeholder="Size, what bothers you about it, what you'd like to change"></textarea>
+        </div>
+        <button class="button button--accent qform__send" type="submit">Send quote request</button>
+        <p class="qform__status" role="status" aria-live="polite"></p>
+        <noscript><p class="qform__status">To request a quote, call or text (323) 940-8041.</p></noscript>
       </form>
-      <p class="card__phone">Or call <a href="tel:+13239408041">(323) 940-8041</a></p>
+      <p class="card__phone">Prefer to talk? Call <a href="tel:+13239408041">(323) 940-8041</a></p>
     </div>
   </section>
 
@@ -343,6 +415,7 @@
       <p>Call or text</p>
       <a href="tel:+13239408041">(323) 940-8041</a>
       <a href="sms:+13239408041">Send a text</a>
+      <a href="#quote">Request a quote</a>
     </div>
     <div>
       <p>On this page</p>
@@ -367,6 +440,12 @@
   </svg>
   <p class="foot__legal">© <span data-year>2026</span> Algazy Group Inc. · Kitchen remodeling, Los Angeles · CSLB License #1234567</p>
 </footer>
+
+<!-- Phone only: the two actions stay in reach once the first screen has scrolled away -->
+<div class="dock" data-dock>
+  <a class="button button--paper" href="tel:+13239408041">Call</a>
+  <a class="button button--accent" href="#quote">Get a quote</a>
+</div>
 
 <script src="assets/js/main.js" defer></script>
 </body>

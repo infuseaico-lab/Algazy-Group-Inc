@@ -48,7 +48,8 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!picker) return;
   const tabs = [...picker.querySelectorAll('[role="tab"]')];
   const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
-  const select = (tab, focus) => {
+  const formLayout = document.getElementById('q-layout');
+  const select = (tab, focus, chosen) => {
     tabs.forEach((t, n) => {
       const on = t === tab;
       t.setAttribute('aria-selected', on);
@@ -61,33 +62,94 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       }
     });
     if (focus) tab.focus();
+    // a layout the visitor picked carries into the quote form
+    if (chosen && formLayout) formLayout.value = tab.textContent.trim();
   };
   tabs.forEach((t, n) => {
-    t.addEventListener('click', () => select(t));
+    t.addEventListener('click', () => select(t, false, true));
     t.addEventListener('keydown', (e) => {
       const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
-      if (k) { e.preventDefault(); select(tabs[(n + k + tabs.length) % tabs.length], true); }
-      if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
-      if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+      if (k) { e.preventDefault(); select(tabs[(n + k + tabs.length) % tabs.length], true, true); }
+      if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true, true); }
+      if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true, true); }
     });
   });
   picker.hidden = false;
   select(tabs.find((t) => t.getAttribute('aria-selected') === 'true') || tabs[0]);
 })();
 
-// Contact card: the text message carries the visitor's area and house.
+// Quote form: checks the two fields we need, then sends. With data-endpoint set, the request is
+// posted there (any form service that accepts a POST); without one, it opens a text message to the
+// office with every answer filled in.
 (() => {
-  const form = document.querySelector('[data-sms]');
-  const link = document.querySelector('[data-sms-link]');
-  if (!form || !link) return;
-  const update = () => {
-    const area = form.area.value, layout = form.layout.value;
-    const body = `Hi Algazy Group, I'd like a kitchen remodel. Area: ${area}. Layout: ${layout}.`;
-    // iOS reads "&body=", Android "?body="; "?&body=" works on both
-    link.href = `sms:+13239408041?&body=${encodeURIComponent(body)}`;
+  const form = document.getElementById('quote-form');
+  if (!form) return;
+  const status = form.querySelector('.qform__status');
+  const send = form.querySelector('.qform__send');
+  const checks = [
+    [form.name, (v) => v.trim().length > 1],
+    [form.phone, (v) => v.replace(/\D/g, '').length >= 10],
+    [form.email, (v) => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())],
+  ];
+  const mark = (input, ok) => {
+    input.setAttribute('aria-invalid', String(!ok));
+    document.getElementById(input.getAttribute('aria-describedby')).hidden = ok;
   };
-  form.addEventListener('change', update);
-  update();
+  checks.forEach(([input, ok]) => input.addEventListener('blur', () => { if (input.value) mark(input, ok(input.value)); }));
+  checks.forEach(([input, ok]) => input.addEventListener('input', () => { if (input.getAttribute('aria-invalid') === 'true') mark(input, ok(input.value)); }));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const bad = checks.filter(([input, ok]) => { const good = ok(input.value); mark(input, good); return !good; });
+    if (bad.length) { bad[0][0].focus(); status.textContent = ''; return; }
+    const data = Object.fromEntries(new FormData(form));
+    const endpoint = form.dataset.endpoint;
+    if (endpoint) {
+      send.disabled = true; status.textContent = 'Sending…';
+      try {
+        const r = await fetch(endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+        if (!r.ok) throw new Error(r.status);
+        form.reset();
+        status.textContent = `Thank you, ${data.name.split(' ')[0]}. We'll call you at ${data.phone} soon.`;
+      } catch {
+        status.textContent = 'That did not go through. Please call or text (323) 940-8041.';
+      } finally { send.disabled = false; }
+      return;
+    }
+    const body = [
+      'Quote request',
+      `Name: ${data.name}`, `Phone: ${data.phone}`, data.email && `Email: ${data.email}`,
+      `Work: ${data.scope}`, `Area: ${data.area}`, `Layout: ${data.layout}`,
+      `Start: ${data.start}`, `Budget: ${data.budget}`, data.notes && `Notes: ${data.notes}`,
+    ].filter(Boolean).join('\n');
+    // iOS reads "&body=", Android "?body="; "?&body=" works on both
+    location.href = `sms:+13239408041?&body=${encodeURIComponent(body)}`;
+    status.textContent = 'Your messages app should open with the details ready to send. If it does not, call (323) 940-8041.';
+  });
+})();
+
+// Phone dock: Call and Get a quote appear once the hero's own buttons have scrolled away,
+// and step aside while the quote form is on screen.
+(() => {
+  const dock = document.querySelector('[data-dock]');
+  const heroActions = document.querySelector('[data-hero-actions]');
+  const quote = document.getElementById('quote');
+  if (!dock || !heroActions || !quote || !('IntersectionObserver' in window)) return;
+  let pastHero = false, atQuote = false;
+  const set = () => dock.classList.toggle('is-shown', pastHero && !atQuote);
+  dock.classList.add('is-managed');
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; set(); }).observe(heroActions);
+  new IntersectionObserver(([e]) => { atQuote = e.isIntersecting; set(); }, { rootMargin: '0px 0px -30% 0px' }).observe(quote);
+})();
+
+// Gallery strip (phone): mark the photo in view so only its caption shows.
+(() => {
+  const strip = document.querySelector('.gallery__frames');
+  if (!strip || !('IntersectionObserver' in window)) { document.querySelectorAll('.frame').forEach((f) => f.classList.add('is-current')); return; }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) e.target.classList.toggle('is-current', e.intersectionRatio >= 0.6);
+  }, { root: strip, threshold: [0, 0.6, 1] });
+  strip.querySelectorAll('.frame').forEach((f) => io.observe(f));
 })();
 
 // Reveal once on entry. Never replays, never leaves content hidden.
