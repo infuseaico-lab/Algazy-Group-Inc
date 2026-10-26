@@ -187,7 +187,7 @@ main, .foot { overflow-x: clip; }
 .section__head { display: grid; gap: var(--space-2); max-width: 44rem; margin-bottom: var(--head-gap); }
 .section__head--row { max-width: none; grid-template-columns: minmax(0, 1fr); align-items: end; }
 .section__head--row > div:first-child { display: grid; gap: var(--space-3); max-width: 44rem; }
-.section__intro { font-size: var(--text-lg); color: var(--color-muted-foreground); }
+.section__intro { font-size: var(--text-lg); color: var(--color-muted-foreground); text-wrap: pretty; }
 .section__note { margin-top: var(--space-6); color: var(--color-muted-foreground); }
 .section__note a { color: var(--color-foreground); font-weight: 600; text-underline-offset: 3px; }
 .section__more { margin-top: var(--space-6); justify-self: start; }
