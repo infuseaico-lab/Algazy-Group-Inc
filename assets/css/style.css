@@ -26,6 +26,7 @@
   --color-on-ink-muted: #D6D6D6;
 
   --font: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Outfit", "DM Sans", system-ui, sans-serif;   /* titles */
 
   --text-sm: 0.875rem;
   --text-base: 0.875rem;             /* phone: 14px body, 16px from 48em */
@@ -93,8 +94,8 @@ main, .foot { overflow-x: clip; }
 .ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
 .ico--tile { width: 36px; height: 36px; padding: 8px; border-radius: var(--radius-sm); background: var(--color-accent-soft); color: var(--color-accent-strong); }
 
-.h2 { font-size: var(--text-h2); font-weight: 500; line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
-.h3 { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-h3); font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+.h2 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+.h3 { display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-display); font-size: var(--text-h3); font-weight: 500; line-height: 1.3; letter-spacing: -0.005em; }
 
 /* ---------- buttons and links ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 48px; padding: 10px 20px; border: 1.5px solid transparent; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 600; line-height: 1.2; text-align: center; text-decoration: none; cursor: pointer; transition: background-color var(--t) ease, border-color var(--t) ease, color var(--t) ease, box-shadow var(--t) ease, transform var(--t-fast) var(--ease); }
@@ -122,7 +123,7 @@ main, .foot { overflow-x: clip; }
 .bar__inner { display: flex; align-items: center; gap: var(--space-2); max-width: var(--max); min-height: var(--bar-h); margin-inline: auto; padding: var(--space-2) var(--gutter); }
 .bar__brand { display: grid; min-width: 0; margin-right: auto; text-decoration: none; line-height: 1.2; }
 /* logo: "Algazy" in charcoal (cream on dark grounds), "Group" in gold */
-.logo { font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+.logo { font-family: var(--font); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
 /* one line when it fits; on a very narrow phone with very large text "Group" drops under "Algazy" */
 .logo__accent { display: inline-block; }
 .logo__accent { color: var(--color-accent); }
@@ -158,7 +159,7 @@ main, .foot { overflow-x: clip; }
 /* shade over the photo, darkest where the text sits, so white type stays readable on any of the four kitchens */
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(24 24 24 / 0.9) 0%, rgb(24 24 24 / 0.72) 45%, rgb(24 24 24 / 0.3) 80%, rgb(24 24 24 / 0.2) 100%); }
 .hero__copy { display: grid; gap: var(--space-4); width: 100%; max-width: var(--max); margin-inline: auto; padding: var(--space-9) var(--gutter) var(--space-6); }
-.hero__title { font-size: var(--text-h1); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; text-wrap: balance; color: #FFFFFF; }
+.hero__title { font-family: var(--font-display); font-size: var(--text-h1); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; color: #FFFFFF; }
 .hero__lead { font-size: var(--text-lg); color: #ECE8DE; max-width: 34rem; }
 .hero__actions { display: grid; gap: var(--space-2); margin-top: var(--space-1); }
 .hero .btn--outline { border-color: rgb(250 247 238 / 0.85); color: var(--color-on-ink); }
@@ -357,9 +358,71 @@ main, .foot { overflow-x: clip; }
 .dock.is-managed:not(.is-shown) { transform: translateY(110%); }
 @media (min-width: 48em) { .dock { display: none; } }
 
+/* ---------- modern details ---------- */
+/* section label pills */
+.pill { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 5px 12px 5px 10px; border-radius: 999px; background: var(--color-accent-soft); color: var(--color-accent-strong); font-size: 0.8125rem; font-weight: 600; line-height: 1.2; }
+.pill .ico { width: 14px; height: 14px; stroke-width: 2; }
+.quote .pill { background: rgb(228 176 30 / 0.16); color: var(--color-accent); }
+.faq__side .pill { margin-bottom: calc(var(--space-2) * -1); }
+
+/* moving ribbon of service areas */
+.ticker { display: flex; overflow: hidden; padding: 14px 0; background: var(--color-ink); color: var(--color-on-ink); border-top: 1px solid rgb(250 247 238 / 0.08); }
+.ticker__track { display: flex; flex: none; gap: 28px; padding-right: 28px; margin: 0; font-size: 0.9375rem; font-weight: 500; white-space: nowrap; }
+.ticker__track li { display: inline-flex; align-items: center; gap: 28px; }
+.ticker__track li::after { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--color-accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .ticker__track { animation: ticker 55s linear infinite; }
+  .ticker:hover .ticker__track { animation-play-state: paused; }
+}
+@keyframes ticker { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker { justify-content: center; }
+  .ticker__track { flex-wrap: wrap; justify-content: center; white-space: normal; padding-inline: var(--gutter); row-gap: 8px; }
+  .ticker__track[aria-hidden] { display: none; }
+}
+
+/* hero trust points on frosted glass */
+.hero .facts { padding: var(--space-3) var(--space-4); background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.16); border-radius: var(--radius); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+@media (min-width: 64em) {
+  .hero .facts { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); width: fit-content; max-width: none; padding: var(--space-3) var(--space-5); border-top: 1px solid rgb(255 255 255 / 0.16); }
+}
+
+/* services: photos zoom gently under the pointer; on desktop a bento grid */
+.card__img { transition: transform 700ms var(--ease); }
+@media (hover: hover) and (pointer: fine) { .card:hover .card__img { transform: scale(1.04); } }
+@media (min-width: 64em) {
+  .cards > .card:first-child { grid-column: span 2; flex-direction: row; }
+  .cards > .card:first-child .card__img { width: 58%; aspect-ratio: auto; height: 100%; min-height: 100%; }
+  .cards > .card:first-child .card__body { align-content: center; padding: var(--space-6); }
+  .cards > .card--cta { grid-column: 1 / -1; }
+  .cards > .card--cta .card__body { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: var(--space-6); }
+  .cards > .card--cta .card__body .h3 { grid-column: 1; }
+  .cards > .card--cta .card__body p { grid-column: 1; }
+  .cards > .card--cta .card__body .btn { grid-column: 2; grid-row: 1 / span 2; }
+}
+
+/* gallery captions on frosted chips over the photo */
+.shot { position: relative; }
+.shot figcaption { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); padding: 6px 12px; border-radius: 999px; background: rgb(24 24 24 / 0.5); color: #FFFFFF; font-size: 0.8125rem; line-height: 1.3; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+
+/* ---------- deferred rendering: sections below the first screen are laid out only when they come near ---------- */
+.section, .quote { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
 /* ---------- motion ---------- */
 @keyframes fade-up { from { opacity: 0; transform: translateY(10px); } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes slow-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 @media (prefers-reduced-motion: no-preference) {
+  /* hero: copy arrives in reading order; the photo settles with a slow zoom */
+  .js .hero__copy > * { animation: hero-rise 700ms var(--ease) both; }
+  .js .hero__copy > :nth-child(2) { animation-delay: 90ms; }
+  .js .hero__copy > :nth-child(3) { animation-delay: 180ms; }
+  .js .hero__copy > :nth-child(4) { animation-delay: 270ms; }
+  .hero__media img.is-on { animation: slow-zoom 9s var(--ease) both; }
+  /* pictures fade in as they finish loading (class set by script, so without it nothing is hidden) */
+  .img-fade img.is-pending { opacity: 0; }
+  .img-fade img.is-loaded { opacity: 1; transition: opacity 600ms ease; }
+  /* scrolling: each part rises into place once */
   .js [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease); transition-delay: calc(var(--i, 0) * 60ms); }
   .js [data-reveal].is-in { opacity: 1; transform: none; }
 }

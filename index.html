@@ -11,9 +11,11 @@
   <meta property="og:image" content="assets/img/hero-1-1536.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/img/hero-1-1536.webp" imagesrcset="assets/img/hero-1-800.webp 800w, assets/img/hero-1-1536.webp 1536w" imagesizes="100vw" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
+  <noscript><style>.panel[hidden] { display: grid !important; } .panel + .panel { margin-top: 48px; }</style></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -75,10 +77,10 @@
   <!-- Hero: the kitchen crossfades behind a shaded layer; headline, two actions and three verifiable facts sit on it -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero__media" data-fade>
-      <img class="is-on" src="assets/img/hero-1-1536.webp" srcset="assets/img/hero-1-800.webp 800w, assets/img/hero-1-1536.webp 1536w" sizes="(min-width: 64em) 55vw, 100vw" width="1536" height="1024" alt="Modern hillside kitchen with charcoal cabinets, an oak island and a glass wall onto a pool and the city" fetchpriority="high">
-      <img src="assets/img/hero-2-1536.webp" srcset="assets/img/hero-2-800.webp 800w, assets/img/hero-2-1536.webp 1536w" sizes="(min-width: 64em) 55vw, 100vw" width="1536" height="1024" alt="Modern white kitchen with a terrazzo island under a skylight" loading="lazy">
-      <img src="assets/img/hero-3-1536.webp" srcset="assets/img/hero-3-800.webp 800w, assets/img/hero-3-1536.webp 1536w" sizes="(min-width: 64em) 55vw, 100vw" width="1536" height="1024" alt="Modern walnut kitchen with black steel windows onto a hillside of palms" loading="lazy">
-      <img src="assets/img/hero-4-1536.webp" srcset="assets/img/hero-4-800.webp 800w, assets/img/hero-4-1536.webp 1536w" sizes="(min-width: 64em) 55vw, 100vw" width="1536" height="1024" alt="Open-plan kitchen with pale grey cabinets and a porcelain waterfall island" loading="lazy">
+      <img decoding="async" class="is-on" src="assets/img/hero-1-1536.webp" srcset="assets/img/hero-1-800.webp 800w, assets/img/hero-1-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Modern hillside kitchen with charcoal cabinets, an oak island and a glass wall onto a pool and the city" fetchpriority="high">
+      <img decoding="async" src="assets/img/hero-2-1536.webp" srcset="assets/img/hero-2-800.webp 800w, assets/img/hero-2-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Modern white kitchen with a terrazzo island under a skylight" loading="lazy">
+      <img decoding="async" src="assets/img/hero-3-1536.webp" srcset="assets/img/hero-3-800.webp 800w, assets/img/hero-3-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Modern walnut kitchen with black steel windows onto a hillside of palms" loading="lazy">
+      <img decoding="async" src="assets/img/hero-4-1536.webp" srcset="assets/img/hero-4-800.webp 800w, assets/img/hero-4-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="Open-plan kitchen with pale grey cabinets and a porcelain waterfall island" loading="lazy">
     </div>
     <div class="hero__copy">
       <h1 class="hero__title" id="hero-title">Modern kitchen remodeling in Los Angeles</h1>
@@ -95,10 +97,17 @@
     </div>
   </section>
 
+  <!-- Ribbon: the twenty service areas, moving slowly; the second copy only closes the loop -->
+  <div class="ticker" role="region" aria-label="Service areas">
+    <ul class="ticker__track"><li>Hollywood</li><li>Los Feliz</li><li>Silver Lake</li><li>Echo Park</li><li>Hancock Park</li><li>Beverly Hills</li><li>West Hollywood</li><li>Santa Monica</li><li>Culver City</li><li>Westwood</li><li>Studio City</li><li>Sherman Oaks</li><li>Encino</li><li>Burbank</li><li>Glendale</li><li>Pasadena</li><li>South Pasadena</li><li>Highland Park</li><li>Eagle Rock</li><li>Alhambra</li></ul>
+    <ul class="ticker__track" aria-hidden="true"><li>Hollywood</li><li>Los Feliz</li><li>Silver Lake</li><li>Echo Park</li><li>Hancock Park</li><li>Beverly Hills</li><li>West Hollywood</li><li>Santa Monica</li><li>Culver City</li><li>Westwood</li><li>Studio City</li><li>Sherman Oaks</li><li>Encino</li><li>Burbank</li><li>Glendale</li><li>Pasadena</li><li>South Pasadena</li><li>Highland Park</li><li>Eagle Rock</li><li>Alhambra</li></ul>
+  </div>
+
   <!-- Chapter 1: start with the layout (the live picker) -->
   <section class="section" id="layouts" aria-labelledby="layouts-title">
     <div class="wrap">
       <header class="section__head" data-reveal>
+        <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg>Layouts</span>
         <h2 class="h2" id="layouts-title">Start with the layout</h2>
         <p class="section__intro">Galley, L, U or island: the shape of the room decides what fits, what moves and what it costs. Pick yours.</p>
       </header>
@@ -111,8 +120,8 @@
       </div>
 
       <div class="panels">
-        <article class="panel" id="lay-galley" role="tabpanel" aria-labelledby="tab-galley">
-          <img class="panel__img" src="assets/img/lay-galley-1536.webp" srcset="assets/img/lay-galley-800.webp 800w, assets/img/lay-galley-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Modern galley kitchen with graphite and oak cabinets on two parallel walls and a window at the end" loading="lazy">
+        <article class="panel" id="lay-galley" role="tabpanel" hidden aria-labelledby="tab-galley">
+          <img decoding="async" class="panel__img" src="assets/img/lay-galley-1536.webp" srcset="assets/img/lay-galley-800.webp 800w, assets/img/lay-galley-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Modern galley kitchen with graphite and oak cabinets on two parallel walls and a window at the end" loading="lazy">
           <div class="panel__body">
             <h3 class="h3">Galley kitchens</h3>
             <dl class="specs">
@@ -124,8 +133,8 @@
             <a class="link-arrow" href="#quote" aria-label="Request a Quote for a galley kitchen">Request a Quote <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
-        <article class="panel" id="lay-l" role="tabpanel" aria-labelledby="tab-l">
-          <img class="panel__img" src="assets/img/lay-l-1536.webp" srcset="assets/img/lay-l-800.webp 800w, assets/img/lay-l-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Modern L-shaped kitchen in oak and white, opened to the dining room" loading="lazy">
+        <article class="panel" id="lay-l" role="tabpanel" hidden aria-labelledby="tab-l">
+          <img decoding="async" class="panel__img" src="assets/img/lay-l-1536.webp" srcset="assets/img/lay-l-800.webp 800w, assets/img/lay-l-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Modern L-shaped kitchen in oak and white, opened to the dining room" loading="lazy">
           <div class="panel__body">
             <h3 class="h3">L-shaped kitchens</h3>
             <dl class="specs">
@@ -137,8 +146,8 @@
             <a class="link-arrow" href="#quote" aria-label="Request a Quote for an L-shaped kitchen">Request a Quote <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
-        <article class="panel" id="lay-u" role="tabpanel" aria-labelledby="tab-u">
-          <img class="panel__img" src="assets/img/lay-u-1536.webp" srcset="assets/img/lay-u-800.webp 800w, assets/img/lay-u-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Modern U-shaped kitchen with pale grey cabinets and a peninsula with stools facing the family room" loading="lazy">
+        <article class="panel" id="lay-u" role="tabpanel" hidden aria-labelledby="tab-u">
+          <img decoding="async" class="panel__img" src="assets/img/lay-u-1536.webp" srcset="assets/img/lay-u-800.webp 800w, assets/img/lay-u-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Modern U-shaped kitchen with pale grey cabinets and a peninsula with stools facing the family room" loading="lazy">
           <div class="panel__body">
             <h3 class="h3">U-shaped kitchens</h3>
             <dl class="specs">
@@ -151,7 +160,7 @@
           </div>
         </article>
         <article class="panel" id="lay-island" role="tabpanel" aria-labelledby="tab-island">
-          <img class="panel__img" src="assets/img/lay-island-1536.webp" srcset="assets/img/lay-island-800.webp 800w, assets/img/lay-island-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Open-plan kitchen with charcoal cabinets, a long island with oak stools and a glass wall to a terrace" loading="lazy">
+          <img decoding="async" class="panel__img" src="assets/img/lay-island-1536.webp" srcset="assets/img/lay-island-800.webp 800w, assets/img/lay-island-1536.webp 1536w" sizes="(min-width: 64em) 58vw, 100vw" width="1536" height="1024" alt="Open-plan kitchen with charcoal cabinets, a long island with oak stools and a glass wall to a terrace" loading="lazy">
           <div class="panel__body">
             <h3 class="h3">Island kitchens</h3>
             <dl class="specs">
@@ -171,40 +180,41 @@
   <section class="section section--card" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <header class="section__head" data-reveal>
+        <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg>Services</span>
         <h2 class="h2" id="services-title">Every trade, one contract</h2>
         <p class="section__intro">One company answers for the whole kitchen, so nothing falls between the cabinet maker, the electrician and the inspector.</p>
       </header>
       <ul class="cards">
         <li class="card" data-reveal>
-          <img class="card__img" src="assets/img/f-layout-800.webp" width="800" height="533" alt="A wall between kitchen and living room removed, with a new beam in place" loading="lazy">
+          <img decoding="async" class="card__img" src="assets/img/f-layout-800.webp" width="800" height="533" alt="A wall between kitchen and living room removed, with a new beam in place" loading="lazy">
           <div class="card__body">
             <h3 class="h3"><svg class="ico ico--tile" aria-hidden="true"><use href="#i-grid"/></svg> Layout and walls</h3>
             <p>Open the kitchen to the living room, move the sink under the window, fit an island where the room allows it. We frame, set beams and finish the walls flush and square.</p>
           </div>
         </li>
         <li class="card" data-reveal>
-          <img class="card__img" src="assets/img/f-cabinets-800.webp" width="800" height="1200" alt="Handleless matte charcoal cabinet fronts with integrated finger pulls beside a white oak panel" loading="lazy">
+          <img decoding="async" class="card__img" src="assets/img/f-cabinets-800.webp" width="800" height="1200" alt="Handleless matte charcoal cabinet fronts with integrated finger pulls beside a white oak panel" loading="lazy">
           <div class="card__body">
             <h3 class="h3"><svg class="ico ico--tile" aria-hidden="true"><use href="#i-cabinet"/></svg> Cabinets</h3>
             <p>Custom and semi-custom cabinets built to the room's real measurements: handleless matte fronts, wood veneers or lacquer, with soft-close hardware throughout.</p>
           </div>
         </li>
         <li class="card" data-reveal>
-          <img class="card__img" src="assets/img/f-counters-800.webp" width="800" height="800" alt="A mitred waterfall edge on a white porcelain slab island" loading="lazy">
+          <img decoding="async" class="card__img" src="assets/img/f-counters-800.webp" width="800" height="800" alt="A mitred waterfall edge on a white porcelain slab island" loading="lazy">
           <div class="card__body">
             <h3 class="h3"><svg class="ico ico--tile" aria-hidden="true"><use href="#i-layers"/></svg> Counters and surfaces</h3>
             <p>Quartz, porcelain slab, stone and terrazzo, with mitred waterfall edges and full-height backsplashes cut from the same slab.</p>
           </div>
         </li>
         <li class="card" data-reveal>
-          <img class="card__img" src="assets/img/f-systems-800.webp" width="800" height="533" alt="Matte black faucet, flush induction cooktop and warm LED strip lighting" loading="lazy">
+          <img decoding="async" class="card__img" src="assets/img/f-systems-800.webp" width="800" height="533" alt="Matte black faucet, flush induction cooktop and warm LED strip lighting" loading="lazy">
           <div class="card__body">
             <h3 class="h3"><svg class="ico ico--tile" aria-hidden="true"><use href="#i-zap"/></svg> Plumbing, power and light</h3>
             <p>New circuits for induction and integrated appliances, water and gas lines moved where the plan needs them, and LED lighting that meets California's Title&nbsp;24 energy code.</p>
           </div>
         </li>
         <li class="card" data-reveal>
-          <img class="card__img" src="assets/img/f-permits-800.webp" width="800" height="800" alt="Kitchen floor plan drawings on a work counter with a tape measure and pencil" loading="lazy">
+          <img decoding="async" class="card__img" src="assets/img/f-permits-800.webp" width="800" height="800" alt="Kitchen floor plan drawings on a work counter with a tape measure and pencil" loading="lazy">
           <div class="card__body">
             <h3 class="h3"><svg class="ico ico--tile" aria-hidden="true"><use href="#i-clipboard"/></svg> Permits and inspections</h3>
             <p>We draw the plans, file with LADBS or your city's building department, and book every inspection through final sign-off.</p>
@@ -225,24 +235,25 @@
   <section class="section" id="process" aria-labelledby="process-title">
     <div class="wrap">
       <header class="section__head" data-reveal>
+        <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-clipboard"/></svg>Process</span>
         <h2 class="h2" id="process-title">How a remodel runs</h2>
         <p class="section__intro">Three stages, with a written estimate and a schedule before any wall comes down.</p>
       </header>
       <ol class="steps">
         <li class="step" data-reveal>
-          <img class="step__img" src="assets/img/p-visit-800.webp" width="800" height="1200" alt="A dated oak and laminate kitchen with a tape measure stretched along the counter" loading="lazy">
+          <img decoding="async" class="step__img" src="assets/img/p-visit-800.webp" width="800" height="1200" alt="A dated oak and laminate kitchen with a tape measure stretched along the counter" loading="lazy">
           <span class="step__num" aria-hidden="true">1</span>
           <h3 class="h3">First visit</h3>
           <p>We measure the kitchen, open a few cabinets to look at the plumbing and wiring, and talk through what you want to change and roughly what it costs.</p>
         </li>
         <li class="step" data-reveal>
-          <img class="step__img" src="assets/img/p-select-800.webp" width="800" height="800" alt="Charcoal and oak cabinet samples, porcelain, terrazzo and black hardware laid out on a table" loading="lazy">
+          <img decoding="async" class="step__img" src="assets/img/p-select-800.webp" width="800" height="800" alt="Charcoal and oak cabinet samples, porcelain, terrazzo and black hardware laid out on a table" loading="lazy">
           <span class="step__num" aria-hidden="true">2</span>
           <h3 class="h3">Plans and permits</h3>
           <p>You approve the drawings, the cabinets, counters, fixtures and appliances, and a written estimate. Then we file for permits and order materials.</p>
         </li>
         <li class="step" data-reveal>
-          <img class="step__img" src="assets/img/p-done-800.webp" width="800" height="533" alt="A finished modern kitchen with charcoal lower cabinets, oak tall units and a white island" loading="lazy">
+          <img decoding="async" class="step__img" src="assets/img/p-done-800.webp" width="800" height="533" alt="A finished modern kitchen with charcoal lower cabinets, oak tall units and a white island" loading="lazy">
           <span class="step__num" aria-hidden="true">3</span>
           <h3 class="h3">Build and walkthrough</h3>
           <p>We build, pass every inspection and close the punch list with you. The kitchen is handed over clean.</p>
@@ -253,12 +264,13 @@
   </section>
 
   <!-- Chapter 4: the gallery. Phone: swipe strip with previous/next. Wide: three-picture grid.
-       To add a project: copy one <figure class="shot">, point it at the new photo, write its caption. -->
+       To add a project: copy one <figure class="shot" data-reveal>, point it at the new photo, write its caption. -->
   <section class="section section--card" id="gallery" aria-labelledby="gallery-title">
     <div class="wrap">
       <header class="section__head section__head--row" data-reveal>
         <div>
-          <h2 class="h2" id="gallery-title">Kitchen gallery</h2>
+          <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-grid"/></svg>Gallery</span>
+        <h2 class="h2" id="gallery-title">Kitchen gallery</h2>
           <p class="section__intro">Flat fronts, slab counters and as much daylight as the house will give.</p>
         </div>
         <div class="gallery__nav" hidden data-gallery-nav>
@@ -268,16 +280,16 @@
         </div>
       </header>
       <div class="gallery" data-gallery>
-        <figure class="shot">
-          <img src="assets/img/g-1-1536.webp" srcset="assets/img/g-1-800.webp 800w, assets/img/g-1-1536.webp 1536w" sizes="(min-width: 64em) 60vw, 88vw" width="1536" height="1024" alt="Modern hillside kitchen with black cabinets, a white porcelain island and a glass wall to a terrace" loading="lazy">
+        <figure class="shot" data-reveal>
+          <img decoding="async" src="assets/img/g-1-1536.webp" srcset="assets/img/g-1-800.webp 800w, assets/img/g-1-1536.webp 1536w" sizes="(min-width: 64em) 60vw, 88vw" width="1536" height="1024" alt="Modern hillside kitchen with black cabinets, a white porcelain island and a glass wall to a terrace" loading="lazy">
           <figcaption>Hillside kitchen, black cabinets and a porcelain island</figcaption>
         </figure>
-        <figure class="shot">
-          <img src="assets/img/g-2-1536.webp" srcset="assets/img/g-2-800.webp 800w, assets/img/g-2-1536.webp 1536w" sizes="(min-width: 64em) 38vw, 88vw" width="1536" height="1024" alt="Modern white oak kitchen with open shelves under a skylight" loading="lazy">
+        <figure class="shot" data-reveal>
+          <img decoding="async" src="assets/img/g-2-1536.webp" srcset="assets/img/g-2-800.webp 800w, assets/img/g-2-1536.webp 1536w" sizes="(min-width: 64em) 38vw, 88vw" width="1536" height="1024" alt="Modern white oak kitchen with open shelves under a skylight" loading="lazy">
           <figcaption>White oak kitchen with open shelves under a skylight</figcaption>
         </figure>
-        <figure class="shot">
-          <img src="assets/img/g-3-1536.webp" srcset="assets/img/g-3-800.webp 800w, assets/img/g-3-1536.webp 1536w" sizes="(min-width: 64em) 38vw, 88vw" width="1536" height="1024" alt="Modern kitchen with deep green flat cabinets, terrazzo counters and a steel-framed window" loading="lazy">
+        <figure class="shot" data-reveal>
+          <img decoding="async" src="assets/img/g-3-1536.webp" srcset="assets/img/g-3-800.webp 800w, assets/img/g-3-1536.webp 1536w" sizes="(min-width: 64em) 38vw, 88vw" width="1536" height="1024" alt="Modern kitchen with deep green flat cabinets, terrazzo counters and a steel-framed window" loading="lazy">
           <figcaption>Green flat-panel kitchen with terrazzo counters</figcaption>
         </figure>
       </div>
@@ -288,6 +300,7 @@
   <section class="section" id="areas" aria-labelledby="areas-title">
     <div class="wrap">
       <header class="section__head" data-reveal>
+        <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Service area</span>
         <h2 class="h2" id="areas-title">Where we work</h2>
         <p class="section__intro">Twenty neighbourhoods and cities across Greater Los Angeles<span class="wide-only">, and the houses we meet in each</span>.</p>
       </header>
@@ -341,6 +354,7 @@
   <section class="section section--card" id="questions" aria-labelledby="faq-title">
     <div class="wrap faq">
       <header class="faq__side" data-reveal>
+        <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg>FAQ</span>
         <h2 class="h2" id="faq-title">Before you call</h2>
         <p class="section__intro">The questions homeowners ask us first.</p>
         <ul class="facts facts--stack">
@@ -349,7 +363,7 @@
           <li><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg> Greater Los Angeles</li>
         </ul>
       </header>
-      <div class="accordion">
+      <div class="accordion" data-reveal>
         <details>
           <summary>Do you handle the permits?<svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></summary>
           <p>Yes. We prepare the plans, file with LADBS or your own city's building department (Pasadena, Glendale, Burbank, Santa Monica and Beverly Hills run their own), and meet the inspector at every visit.</p>
@@ -383,16 +397,17 @@
        to receive them by email. Left empty, sending opens a text message to (323) 940-8041 with the details. -->
   <section class="quote" id="quote" aria-labelledby="quote-title">
     <div class="wrap quote__grid">
-      <div class="quote__side">
+      <div class="quote__side" data-reveal>
+        <span class="pill"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>Get started</span>
         <h2 class="h2" id="quote-title">Request a Quote</h2>
         <p class="quote__lead">Tell us how to reach you and where you are. We'll call back to talk it through and book a visit.</p>
-        <img class="quote__img" src="assets/img/contact-800.webp" width="800" height="533" alt="A contemporary hillside house at dusk with a lit kitchen behind a glass wall and palm trees" loading="lazy">
+        <img decoding="async" class="quote__img" src="assets/img/quote-kitchen-800.webp" srcset="assets/img/quote-kitchen-800.webp 800w, assets/img/quote-kitchen-1536.webp 1536w" sizes="(min-width: 64em) 40vw, 100vw" width="1536" height="1024" alt="Modern kitchen at dusk with charcoal cabinets, an oak and stone island, brass pendants and a glass wall onto palm trees" loading="lazy">
         <ul class="facts facts--stack facts--dark">
           <li><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg> Prefer to talk? <a href="tel:+13239408041">(323) 940-8041</a></li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg> CSLB license #1234567</li>
         </ul>
       </div>
-      <form class="form" id="quote-form" novalidate data-endpoint="">
+      <form class="form" id="quote-form" novalidate data-endpoint="" data-reveal>
         <div class="field">
           <label for="q-name">Name <span class="req">(required)</span></label>
           <input id="q-name" name="name" type="text" autocomplete="name" required aria-describedby="q-name-err">

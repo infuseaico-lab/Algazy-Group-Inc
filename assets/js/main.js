@@ -83,7 +83,8 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   };
   const start = () => { clearInterval(timer); timer = setInterval(step, 6000); };
   document.addEventListener('visibilitychange', () => (document.hidden ? clearInterval(timer) : start()));
-  addEventListener('load', () => imgs.slice(1).forEach((im) => { im.loading = 'eager'; }));
+  // the other three pictures load once the page is idle, after everything visible
+  addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => imgs.slice(1).forEach((im) => { im.loading = 'eager'; })));
   start();
 })();
 
@@ -241,6 +242,20 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const r = el.getBoundingClientRect();
     if (r.top < innerHeight && r.bottom > 0) el.classList.add('is-in');
   }), 2000));
+})();
+
+// Lazy pictures fade in once loaded. Skipped under reduced motion; the crossfading hero pictures manage
+// their own opacity.
+(() => {
+  if (reduced) return;
+  document.documentElement.classList.add('img-fade');
+  for (const img of document.querySelectorAll('img[loading="lazy"]')) {
+    if (img.closest('[data-fade]') || img.complete) continue;
+    img.classList.add('is-pending');
+    const done = () => { img.classList.remove('is-pending'); img.classList.add('is-loaded'); };
+    img.addEventListener('load', done, { once: true });
+    img.addEventListener('error', done, { once: true });
+  }
 })();
 
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
