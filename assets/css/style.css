@@ -122,12 +122,9 @@ main, .foot { overflow-x: clip; }
 .bar { position: sticky; top: 0; z-index: 30; background: rgb(250 247 238 / 0.94); border-bottom: 1px solid var(--color-border); -webkit-backdrop-filter: saturate(1.4) blur(10px); backdrop-filter: saturate(1.4) blur(10px); }
 .bar__inner { display: flex; align-items: center; gap: var(--space-2); max-width: var(--max); min-height: var(--bar-h); margin-inline: auto; padding: var(--space-2) var(--gutter); }
 .bar__brand { display: grid; min-width: 0; margin-right: auto; text-decoration: none; line-height: 1.2; }
-/* logo: "Algazy" in charcoal (cream on dark grounds), "Group" in gold */
-.logo { font-family: var(--font); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
-/* one line when it fits; on a very narrow phone with very large text "Group" drops under "Algazy" */
-.logo__accent { display: inline-block; }
-.logo__accent { color: var(--color-accent); }
-.bar__name { font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.875rem); }
+/* image logo: shrinks with the space left beside the call and menu buttons, never wider than its column */
+.bar__logo { display: block; background: none; width: clamp(150px, 52vw, 200px); max-width: 100%; height: auto; }
+@media (min-width: 64em) { .bar__logo { width: 240px; } }
 .bar__nav { display: none; }
 .bar__phone { min-width: 44px; min-height: 44px; padding: 10px; }
 .bar__phone span { display: none; }
@@ -344,7 +341,7 @@ main, .foot { overflow-x: clip; }
 .foot__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-5); }
 .foot__grid > div { display: grid; gap: var(--space-2); align-content: start; }
 .foot__brand { grid-column: 1 / -1; }
-.foot__name { font-size: 1.75rem; color: var(--color-on-ink); }
+.foot__name img { display: block; background: none; width: 240px; max-width: 100%; height: auto; }
 .foot__head { font-weight: 600; color: var(--color-on-ink); }
 .foot a { display: inline-flex; align-items: center; min-height: 32px; text-decoration: none; }
 .foot a:hover { color: var(--color-on-ink); text-decoration: underline; text-underline-offset: 3px; }
