@@ -1,11 +1,83 @@
 {
   "version": 1,
   "skills": {
+    "agent-security-super-skill": {
+      "source": "get-zeked/agent-security-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "c9384dd027dcef4fb9a1417c246e876ee46ce32de07cc5310622a5ddeda880e2"
+    },
+    "ai-agent-super-skill": {
+      "source": "get-zeked/ai-agent-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "269dcc3481b2560a9fcf331b487951f71b38152bc44ddea9dabed7f33db3f0ed"
+    },
+    "content-creative-super-skill": {
+      "source": "get-zeked/content-creative-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "7ddc9436f72564999e3f4f3519d0f9f3a8bfee803e9807061faf294c50ee0756"
+    },
     "design-taste-frontend": {
       "source": "Leonxlnx/taste-skill",
       "sourceType": "github",
       "skillPath": "skills/taste-skill/SKILL.md",
       "computedHash": "6ac8ba6089dcbc303744a507a4587113c5d845ca2f658b3ce2b0b5eab108fb0d"
+    },
+    "dev-engineering-super-skill": {
+      "source": "get-zeked/dev-engineering-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "ac5a85083b7205fe153a06325006531083eaf6341879f82369af0a9b40d475a2"
+    },
+    "finance-super-skill": {
+      "source": "get-zeked/finance-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "7b148096b8a8f75cb9c76a732f36c167cafe56560a2a59ef4dc996165fea11a9"
+    },
+    "legal-super-skill": {
+      "source": "get-zeked/legal-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "cd8264bc9bbee1595a715c060fd29854db1b3a86d98b09a4c029b10866186ca1"
+    },
+    "marketing-super-skill": {
+      "source": "get-zeked/marketing-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f7c4ef1a881c4bb7e1327227abd653357a41a83c24e67cc3b4b96a2e9267e4b5"
+    },
+    "operations-cx-super-skill": {
+      "source": "get-zeked/operations-cx-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "0793e4d8d1ded5605f5e4ee05a85330d65641464f035612f50d5ca23f2419754"
+    },
+    "pm-super-skill": {
+      "source": "get-zeked/pm-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "cff1e7b0b58d9b18ed7abd7067549ed524bbb538df9b55348ae0433443f0f1cc"
+    },
+    "research-knowledge-super-skill": {
+      "source": "get-zeked/research-knowledge-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "7e82014886095b0204a42b61d5ae86b742619fdfe9111eab358a62e9e9809bec"
+    },
+    "sales-super-skill": {
+      "source": "get-zeked/sales-super-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "4534f5939b6ca23f36542b1254a11469cc34bb14c90b70165b0b245f236826a9"
+    },
+    "token-efficient": {
+      "source": "get-zeked/token-efficient",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f67b7a3672f179a52cca0b883aeebc2bdd90c3993f26f28f719a4f07d0a33540"
     }
   }
 }
