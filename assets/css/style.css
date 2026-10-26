@@ -5,7 +5,7 @@
 
 /* ---------- tokens ---------- */
 :root {
-  /* palette: charcoal #333333, gold #E4B01E, cream #FAF7EE, grey #CACACA */
+  /* palette: charcoal #333333, gold #DEC384, cream #FAF7EE, grey #CACACA */
   --color-background: #FAF7EE;        /* cream */
   --color-card: #FFFFFF;
   --color-foreground: #333333;        /* charcoal */
@@ -13,11 +13,11 @@
   --color-muted-foreground: #5C5C5C;
   --color-primary: #8C8C8C;           /* input borders (3:1 on white) */
   --color-secondary: #CACACA;
-  --color-accent: #E4B01E;            /* gold: calls to action */
-  --color-accent-hover: #E4B01E;     /* same gold; hover is shown by the shadow */
+  --color-accent: #DEC384;            /* gold: calls to action */
+  --color-accent-hover: #DEC384;     /* same gold; hover is shown by the shadow */
   --color-on-accent: #333333;
-  --color-accent-soft: rgb(228 176 30 / 0.16);   /* #E4B01E tint */
-  --color-accent-strong: #E4B01E;     /* icons on light grounds (decorative) */
+  --color-accent-soft: rgb(222 195 132 / 0.16);   /* #DEC384 tint */
+  --color-accent-strong: #DEC384;     /* icons on light grounds (decorative) */
   --color-border: #CACACA;            /* grey */
   --color-destructive: #DC2626;
   --color-success: #15803D;
@@ -176,7 +176,7 @@ main, .foot { overflow-x: clip; }
   .hero::before { background: linear-gradient(90deg, rgb(24 24 24 / 0.88) 0%, rgb(24 24 24 / 0.72) 38%, rgb(24 24 24 / 0.25) 70%, rgb(24 24 24 / 0.1) 100%); }
   .hero__copy { padding-block: var(--space-9); }
   .hero__copy > * { max-width: 38rem; }
-  .hero__title { max-width: 12ch; }
+  .hero__title { max-width: 12.5em; }   /* two lines: "Modern Kitchen Remodeling / in Los Angeles" */
   .hero__actions { display: flex; flex-wrap: wrap; }
   .hero .facts { padding-top: var(--space-5); border-top: 1px solid rgb(250 247 238 / 0.22); }
 }
@@ -340,17 +340,17 @@ main, .foot { overflow-x: clip; }
 .deco::before, .deco::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
 /* layouts: drafting grid fading out from the top right, with a barely-there kitchen photo under it */
 .deco--kitchen::before { inset: 0; background-image: linear-gradient(rgb(51 51 51 / 0.07) 1px, transparent 1px), linear-gradient(90deg, rgb(51 51 51 / 0.07) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse 75% 65% at 100% 0%, #000, transparent 75%); mask-image: radial-gradient(ellipse 75% 65% at 100% 0%, #000, transparent 75%); }
-.deco--kitchen::after { z-index: -2; inset: 0; background: url("../img/sub-layouts-800.webp") right top / cover no-repeat; opacity: 0.12; -webkit-mask-image: linear-gradient(to bottom, #000 10%, transparent 75%); mask-image: linear-gradient(to bottom, #000 10%, transparent 75%); }
+.deco--kitchen::after { z-index: -2; inset: 0; background: url("../img/sub-layouts-800.webp") right top / cover no-repeat; opacity: 0.16; -webkit-mask-image: linear-gradient(to bottom, #000 10%, transparent 75%); mask-image: linear-gradient(to bottom, #000 10%, transparent 75%); }
 /* services: a field of gold dots in the top corner */
-.deco--dots::before { top: 0; right: 0; width: min(420px, 70%); height: 300px; background: radial-gradient(rgb(228 176 30 / 0.5) 1.3px, transparent 1.8px) 0 0 / 20px 20px; -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 100% 0%, #000, transparent 70%); }
+.deco--dots::before { top: 0; right: 0; width: min(420px, 70%); height: 300px; background: radial-gradient(rgb(222 195 132 / 0.85) 1.3px, transparent 1.8px) 0 0 / 20px 20px; -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 100% 0%, #000, transparent 70%); }
 /* process: the AG emblem as a large watermark */
 .deco--emblem::before { top: 20px; right: -90px; width: 300px; aspect-ratio: 1; background: url("../img/deco-emblem.webp") center / contain no-repeat; opacity: 0.05; }
 /* areas: a barely-there Los Angeles hillside kitchen behind the cards */
-.deco--view::before { inset: 0; background: url("../img/sub-areas-800.webp") center / cover no-repeat; opacity: 0.12; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 75%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 75%, transparent); }
+.deco--view::before { inset: 0; background: url("../img/sub-areas-800.webp") center / cover no-repeat; opacity: 0.16; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 75%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 75%, transparent); }
 /* questions: a line drawing of a kitchen along the bottom */
 .deco--sketch::before { right: -24px; bottom: -8px; width: min(560px, 105%); aspect-ratio: 1100 / 573; background: url("../img/deco-elevation.webp") right bottom / contain no-repeat; opacity: 0.1; }
 /* quote: warm gold light and a fine grid on the dark ground */
-.deco--glow::before { inset: 0; background: radial-gradient(36rem 26rem at 0% 0%, rgb(228 176 30 / 0.16), transparent 70%), radial-gradient(30rem 22rem at 100% 100%, rgb(228 176 30 / 0.08), transparent 70%); }
+.deco--glow::before { inset: 0; background: radial-gradient(36rem 26rem at 0% 0%, rgb(222 195 132 / 0.16), transparent 70%), radial-gradient(30rem 22rem at 100% 100%, rgb(222 195 132 / 0.08), transparent 70%); }
 .deco--glow::after { inset: 0; background-image: linear-gradient(rgb(250 247 238 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(250 247 238 / 0.05) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: linear-gradient(160deg, #000, transparent 60%); mask-image: linear-gradient(160deg, #000, transparent 60%); }
 @media (min-width: 64em) {
   .deco--kitchen::after { left: 35%; background-image: url("../img/sub-layouts-1536.webp"); -webkit-mask-image: linear-gradient(to right, transparent, #000 40%), linear-gradient(to bottom, #000 30%, transparent 90%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 40%), linear-gradient(to bottom, #000 30%, transparent 90%); mask-composite: intersect; }
@@ -363,14 +363,44 @@ main, .foot { overflow-x: clip; }
 .foot { padding: var(--space-8) 0 calc(var(--space-9) + env(safe-area-inset-bottom)); background: var(--color-ink); color: var(--color-on-ink-muted); border-top: 1px solid rgb(250 247 238 / 0.1); }
 .foot :focus-visible { outline-color: var(--color-on-ink); }
 .foot__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-5); }
-.foot__grid > div { display: grid; gap: var(--space-2); align-content: start; }
+.foot__grid > div { display: grid; gap: 0; align-content: start; }
 .foot__brand { grid-column: 1 / -1; }
 .foot__name img { display: block; background: none; width: 240px; max-width: 100%; height: auto; }
-.foot__head { font-weight: 600; color: var(--color-on-ink); }
-.foot a { display: inline-flex; align-items: center; min-height: 32px; text-decoration: none; }
+.foot__head { margin-bottom: var(--space-1); font-weight: 600; color: var(--color-on-ink); }
+.foot__brand { gap: var(--space-3) !important; }
+.foot__grid span { display: inline-flex; align-items: center; min-height: 40px; }
+.foot a { display: inline-flex; align-items: center; min-height: 40px; text-decoration: none; }
+.foot a[aria-current="page"] { color: var(--color-on-ink); }
 .foot a:hover { color: var(--color-on-ink); text-decoration: underline; text-underline-offset: 3px; }
-.foot__legal { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid rgb(250 247 238 / 0.12); font-size: var(--text-sm); }
+/* bottom bar: copyright on one side, legal pages on the other; stacked on phones */
+.foot__legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-5); margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid rgb(250 247 238 / 0.12); font-size: var(--text-sm); }
+.foot__legal nav { display: flex; flex-wrap: wrap; gap: 0 var(--space-5); }
 @media (min-width: 48em) { .foot { padding-bottom: var(--space-7); } .foot__grid { grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); } .foot__brand { grid-column: auto; } }
+
+/* ---------- privacy policy and terms pages ---------- */
+.legal { padding-block: var(--section) calc(var(--section) + var(--space-5)); }
+.legal__back { margin-bottom: var(--space-4); color: var(--color-muted-foreground); }
+.legal__back .ico { width: 18px; height: 18px; }
+.legal__head { display: grid; gap: var(--space-2); max-width: 44rem; margin-bottom: var(--head-gap); }
+.legal__head .h1 { font-family: var(--font-display); font-size: var(--text-h2); font-weight: 500; line-height: 1.15; letter-spacing: -0.02em; }
+.legal__date { color: var(--color-muted-foreground); }
+.legal__grid { display: grid; gap: var(--space-6); }
+.legal__toc { display: none; }
+.prose { display: grid; gap: var(--space-3); max-width: 44rem; padding: var(--space-5) var(--space-4); background: var(--color-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+.prose h2 { margin-top: var(--space-5); padding-top: var(--space-5); border-top: 1px solid var(--color-border); font-family: var(--font-display); font-size: var(--text-h3); font-weight: 500; line-height: 1.3; scroll-margin-top: calc(var(--bar-h) + 16px); }
+.prose h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.prose ul { display: grid; gap: var(--space-2); padding-left: 1.25em; list-style: disc; }
+.prose li::marker { color: var(--color-accent); }
+.prose a { font-weight: 500; text-underline-offset: 3px; }
+.prose strong { font-weight: 600; }
+@media (min-width: 48em) { .prose { padding: var(--space-7) var(--space-7); } }
+@media (min-width: 64em) {
+  .legal__grid { grid-template-columns: 15rem minmax(0, 44rem); gap: var(--space-8); align-items: start; }
+  .legal__toc { display: grid; gap: var(--space-1); position: sticky; top: calc(var(--bar-h) + 32px); }
+  .legal__toc p { margin-bottom: var(--space-2); font-weight: 600; }
+  .legal__toc a { display: flex; align-items: center; min-height: 40px; color: var(--color-muted-foreground); text-decoration: none; }
+  .legal__toc a:hover { color: var(--color-foreground); text-decoration: underline; text-underline-offset: 3px; }
+}
 
 /* ---------- phone dock ---------- */
 .dock { position: fixed; inset: auto 0 0; z-index: 25; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2); padding: var(--space-2) var(--gutter) calc(var(--space-2) + env(safe-area-inset-bottom)); background: var(--color-card); border-top: 1px solid var(--color-border); box-shadow: 0 -8px 24px -12px rgb(51 51 51 / 0.25); transition: transform var(--t-slow) var(--ease); }
@@ -385,7 +415,7 @@ main, .foot { overflow-x: clip; }
 /* section label pills */
 .pill { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 5px 12px 5px 10px; border-radius: 999px; background: var(--color-accent); color: var(--color-foreground); font-size: 0.8125rem; font-weight: 600; line-height: 1.2; }
 .pill .ico { width: 14px; height: 14px; stroke-width: 2; }
-.quote .pill { background: rgb(228 176 30 / 0.16); color: var(--color-accent); }
+.quote .pill { background: rgb(222 195 132 / 0.16); color: var(--color-accent); }
 .faq__side .pill { margin-bottom: calc(var(--space-2) * -1); }
 
 /* moving ribbon of service areas */
