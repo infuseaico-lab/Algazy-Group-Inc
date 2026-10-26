@@ -255,6 +255,9 @@ main, .foot { overflow-x: clip; }
 .area li:first-child { border-top: 0; padding-top: 0; }
 .area li span { font-weight: 500; }
 .area li small { font-size: var(--text-sm); color: var(--color-muted-foreground); text-align: right; }
+/* phones: city names only; the house types appear from tablet width up */
+.wide-only, .area li small { display: none; }
+@media (min-width: 48em) { .wide-only { display: inline; } .area li small { display: inline; } }
 @media (min-width: 48em) { .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); } }
 
 /* ---------- faq ---------- */
