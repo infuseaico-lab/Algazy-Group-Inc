@@ -195,7 +195,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const body = [
       'Quote request',
       `Name: ${data.name}`, `Phone: ${data.phone}`, `Email: ${data.email}`, `Area: ${data.area}`,
-      `Work: ${data.scope}`, `Layout: ${data.layout}`, `Start: ${data.start}`, `Budget: ${data.budget}`, data.notes && `Notes: ${data.notes}`,
+      `Work: ${data.scope}`, `Layout: ${data.layout}`, `Start: ${data.start}`, data.notes && `Notes: ${data.notes}`,
     ].filter(Boolean).join('\n');
     // iOS reads "&body=", Android "?body="; "?&body=" works on both
     location.href = `sms:+13239408041?&body=${encodeURIComponent(body)}`;
