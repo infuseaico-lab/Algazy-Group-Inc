@@ -335,6 +335,29 @@ main, .foot { overflow-x: clip; }
   .quote__img { display: block; }
 }
 
+/* ---------- faint decoration: drawn behind the content, never read by assistive tech ---------- */
+.deco { position: relative; isolation: isolate; overflow: clip; }
+.deco::before, .deco::after { content: ""; position: absolute; z-index: -1; pointer-events: none; }
+/* layouts: drafting grid fading out from the top right, with a kitchen floor plan over it */
+.deco--plan::before { inset: 0; background-image: linear-gradient(rgb(51 51 51 / 0.07) 1px, transparent 1px), linear-gradient(90deg, rgb(51 51 51 / 0.07) 1px, transparent 1px); background-size: 32px 32px; -webkit-mask-image: radial-gradient(ellipse 75% 65% at 100% 0%, #000, transparent 75%); mask-image: radial-gradient(ellipse 75% 65% at 100% 0%, #000, transparent 75%); }
+.deco--plan::after { top: 12px; right: -48px; width: 230px; aspect-ratio: 1; background: url("../img/deco-plan.webp") center / contain no-repeat; opacity: 0.12; }
+/* services: a field of gold dots in the top corner */
+.deco--dots::before { top: 0; right: 0; width: min(420px, 70%); height: 300px; background: radial-gradient(rgb(228 176 30 / 0.5) 1.3px, transparent 1.8px) 0 0 / 20px 20px; -webkit-mask-image: radial-gradient(ellipse at 100% 0%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 100% 0%, #000, transparent 70%); }
+/* process: the AG emblem as a large watermark */
+.deco--emblem::before { top: 20px; right: -90px; width: 300px; aspect-ratio: 1; background: url("../img/deco-emblem.webp") center / contain no-repeat; opacity: 0.05; }
+/* areas: map contour lines */
+.deco--map::before { inset: 0; background: url("../img/deco-contours.svg") center / cover no-repeat; opacity: 0.4; }
+/* questions: a line drawing of a kitchen along the bottom */
+.deco--sketch::before { right: -24px; bottom: -8px; width: min(560px, 105%); aspect-ratio: 1100 / 573; background: url("../img/deco-elevation.webp") right bottom / contain no-repeat; opacity: 0.1; }
+/* quote: warm gold light and a fine grid on the dark ground */
+.deco--glow::before { inset: 0; background: radial-gradient(36rem 26rem at 0% 0%, rgb(228 176 30 / 0.16), transparent 70%), radial-gradient(30rem 22rem at 100% 100%, rgb(228 176 30 / 0.08), transparent 70%); }
+.deco--glow::after { inset: 0; background-image: linear-gradient(rgb(250 247 238 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(250 247 238 / 0.05) 1px, transparent 1px); background-size: 40px 40px; -webkit-mask-image: linear-gradient(160deg, #000, transparent 60%); mask-image: linear-gradient(160deg, #000, transparent 60%); }
+@media (min-width: 64em) {
+  .deco--plan::after { top: 40px; right: 2vw; width: 460px; }
+  .deco--emblem::before { top: 50%; right: -140px; width: 560px; translate: 0 -50%; }
+  .deco--sketch::before { right: auto; left: max(0px, calc((100vw - var(--max)) / 2)); width: 520px; bottom: 0; background-position: left bottom; }
+}
+
 /* ---------- footer ---------- */
 .foot { padding: var(--space-8) 0 calc(var(--space-9) + env(safe-area-inset-bottom)); background: var(--color-ink); color: var(--color-on-ink-muted); border-top: 1px solid rgb(250 247 238 / 0.1); }
 .foot :focus-visible { outline-color: var(--color-on-ink); }
