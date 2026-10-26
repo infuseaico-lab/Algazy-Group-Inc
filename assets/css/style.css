@@ -40,8 +40,8 @@
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
   --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
   --gutter: clamp(16px, 4vw, 40px);
-  --section: 48px;
-  --head-gap: var(--space-6);
+  --section: 36px;                   /* each side of a section: 72px between sections on phones */
+  --head-gap: var(--space-5);
   --max: 1200px;
 
   --radius-sm: 8px;
@@ -65,8 +65,8 @@
     --text-h3: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
     --text-h2: clamp(1.75rem, 1.25rem + 2.2vw, 3rem);
     --text-h1: clamp(2.5rem, 1.4rem + 3.6vw, 4rem);
-    --section: clamp(64px, 9vw, 120px);
-    --head-gap: var(--space-7);
+    --section: clamp(44px, 4.5vw, 64px);   /* 88-128px between sections on wider screens */
+    --head-gap: var(--space-6);
   }
 }
 
@@ -193,7 +193,8 @@ main, .foot { overflow-x: clip; }
 .section__intro { font-size: var(--text-lg); color: var(--color-muted-foreground); }
 .section__note { margin-top: var(--space-6); color: var(--color-muted-foreground); }
 .section__note a { color: var(--color-foreground); font-weight: 600; text-underline-offset: 3px; }
-.section__more { margin-top: var(--space-6); }
+.section__more { margin-top: var(--space-6); justify-self: start; }
+.panel__cta { justify-self: start; }
 @media (min-width: 48em) {
   .section__head--row { grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-6); }
 }
@@ -404,9 +405,6 @@ main, .foot { overflow-x: clip; }
 /* gallery captions on frosted chips over the photo */
 .shot { position: relative; }
 .shot figcaption { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); padding: 6px 12px; border-radius: 999px; background: rgb(24 24 24 / 0.5); color: #FFFFFF; font-size: 0.8125rem; line-height: 1.3; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-
-/* ---------- deferred rendering: sections below the first screen are laid out only when they come near ---------- */
-.section, .quote { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 
 /* ---------- motion ---------- */
 @keyframes fade-up { from { opacity: 0; transform: translateY(10px); } }

@@ -2,6 +2,11 @@
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Open at the top: browsers restore the last scroll position on reload, which lands mid-page.
+// A link to a section (#quote, #areas…) still goes to that section.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) scrollTo(0, 0);
+
 // Reading progress along the bottom of the header (the storytelling pattern's progress indicator).
 (() => {
   const bar = document.querySelector('[data-progress]');
