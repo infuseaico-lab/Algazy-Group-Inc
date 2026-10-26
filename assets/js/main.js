@@ -128,7 +128,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 })();
 
-// Phone dock: Call and Get a quote appear once the hero's own buttons have scrolled away,
+// Phone dock: Call and Get a quote appear whenever the hero's own buttons are out of sight,
 // and step aside while the quote form is on screen.
 (() => {
   const dock = document.querySelector('[data-dock]');
@@ -138,7 +138,8 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let pastHero = false, atQuote = false;
   const set = () => dock.classList.toggle('is-shown', pastHero && !atQuote);
   dock.classList.add('is-managed');
-  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; set(); }).observe(heroActions);
+  // shown whenever the hero's own buttons are off screen (scrolled past, or below the first screen with large text)
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; set(); }).observe(heroActions);
   new IntersectionObserver(([e]) => { atQuote = e.isIntersecting; set(); }, { rootMargin: '0px 0px -30% 0px' }).observe(quote);
 })();
 
