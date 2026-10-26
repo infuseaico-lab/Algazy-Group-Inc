@@ -121,7 +121,12 @@ main, .foot { overflow-x: clip; }
 .bar { position: sticky; top: 0; z-index: 30; background: rgb(250 247 238 / 0.94); border-bottom: 1px solid var(--color-border); -webkit-backdrop-filter: saturate(1.4) blur(10px); backdrop-filter: saturate(1.4) blur(10px); }
 .bar__inner { display: flex; align-items: center; gap: var(--space-2); max-width: var(--max); min-height: var(--bar-h); margin-inline: auto; padding: var(--space-2) var(--gutter); }
 .bar__brand { display: grid; min-width: 0; margin-right: auto; text-decoration: none; line-height: 1.2; }
-.bar__name { font-size: var(--text-xl); font-weight: 600; letter-spacing: -0.02em; }
+/* logo: "Algazy" in charcoal (cream on dark grounds), "Group" in gold */
+.logo { font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+/* one line when it fits; on a very narrow phone with very large text "Group" drops under "Algazy" */
+.logo__accent { display: inline-block; }
+.logo__accent { color: var(--color-accent); }
+.bar__name { font-size: clamp(1.5rem, 1.3rem + 0.9vw, 1.875rem); }
 .bar__nav { display: none; }
 .bar__phone { min-width: 44px; min-height: 44px; padding: 10px; }
 .bar__phone span { display: none; }
@@ -145,28 +150,37 @@ main, .foot { overflow-x: clip; }
   .bar__menu { display: none; }
 }
 
-/* ---------- hero ---------- */
-.hero { display: grid; }
-.hero__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-muted); }
-.hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1200ms ease; background: none; }
+/* ---------- hero: the kitchen is the background ---------- */
+.hero { position: relative; isolation: isolate; display: grid; align-items: end; min-height: calc(92svh - var(--bar-h)); overflow: hidden; background: var(--color-ink); color: var(--color-on-ink); }
+.hero__media { position: absolute; inset: 0; z-index: -2; }
+.hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; opacity: 0; transition: opacity 1200ms ease; background: none; }
 .hero__media img.is-on { opacity: 1; }
-.hero__copy { display: grid; gap: var(--space-4); padding: var(--space-5) var(--gutter) var(--space-6); }
-.hero__title { font-size: var(--text-h1); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; text-wrap: balance; }
-.hero__lead { font-size: var(--text-lg); color: var(--color-muted-foreground); max-width: 34rem; }
+/* shade over the photo, darkest where the text sits, so white type stays readable on any of the four kitchens */
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(24 24 24 / 0.9) 0%, rgb(24 24 24 / 0.72) 45%, rgb(24 24 24 / 0.3) 80%, rgb(24 24 24 / 0.2) 100%); }
+.hero__copy { display: grid; gap: var(--space-4); width: 100%; max-width: var(--max); margin-inline: auto; padding: var(--space-9) var(--gutter) var(--space-6); }
+.hero__title { font-size: var(--text-h1); font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; text-wrap: balance; color: #FFFFFF; }
+.hero__lead { font-size: var(--text-lg); color: #ECE8DE; max-width: 34rem; }
 .hero__actions { display: grid; gap: var(--space-2); margin-top: var(--space-1); }
+.hero .btn--outline { border-color: rgb(250 247 238 / 0.85); color: var(--color-on-ink); }
+.hero :focus-visible { outline-color: var(--color-on-ink); }
+@media (hover: hover) and (pointer: fine) { .hero .btn--outline:hover { background: var(--color-on-ink); color: var(--color-foreground); } }
 .facts { display: grid; gap: var(--space-2); color: var(--color-foreground); }
 .facts li { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-base); font-weight: 500; line-height: 1.35; }
 .facts .ico { color: var(--color-accent-strong); }
 .facts a { text-underline-offset: 3px; }
+.hero .facts { color: var(--color-on-ink); }
+.hero .facts .ico { color: var(--color-accent); }
 @media (min-width: 30em) {
   .hero__actions { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
 }
 @media (min-width: 64em) {
-  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); align-items: center; gap: var(--space-8); max-width: var(--max); margin-inline: auto; padding: var(--space-8) var(--gutter) var(--space-9); }
-  .hero__media { order: 2; aspect-ratio: auto; height: min(72vh, 640px); border-radius: var(--radius-lg); }
-  .hero__copy { padding: 0; }
+  .hero { align-items: center; min-height: min(calc(100svh - var(--bar-h)), 860px); }
+  .hero::before { background: linear-gradient(90deg, rgb(24 24 24 / 0.88) 0%, rgb(24 24 24 / 0.72) 38%, rgb(24 24 24 / 0.25) 70%, rgb(24 24 24 / 0.1) 100%); }
+  .hero__copy { padding-block: var(--space-9); }
+  .hero__copy > * { max-width: 38rem; }
+  .hero__title { max-width: 12ch; }
   .hero__actions { display: flex; flex-wrap: wrap; }
-  .facts { padding-top: var(--space-5); border-top: 1px solid var(--color-border); }
+  .hero .facts { padding-top: var(--space-5); border-top: 1px solid rgb(250 247 238 / 0.22); }
 }
 
 /* ---------- sections ---------- */
@@ -327,7 +341,7 @@ main, .foot { overflow-x: clip; }
 .foot__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--space-5); }
 .foot__grid > div { display: grid; gap: var(--space-2); align-content: start; }
 .foot__brand { grid-column: 1 / -1; }
-.foot__name { font-size: var(--text-xl); font-weight: 600; color: var(--color-on-ink); }
+.foot__name { font-size: 1.75rem; color: var(--color-on-ink); }
 .foot__head { font-weight: 600; color: var(--color-on-ink); }
 .foot a { display: inline-flex; align-items: center; min-height: 32px; text-decoration: none; }
 .foot a:hover { color: var(--color-on-ink); text-decoration: underline; text-underline-offset: 3px; }
