@@ -87,10 +87,45 @@ if (!location.hash) scrollTo(0, 0);
     i = next;
   };
   const start = () => { clearInterval(timer); timer = setInterval(step, 6000); };
-  document.addEventListener('visibilitychange', () => (document.hidden ? clearInterval(timer) : start()));
+  let film = false;
+  document.addEventListener('hero:film', () => { film = true; clearInterval(timer); });
+  document.addEventListener('visibilitychange', () => (document.hidden || film ? clearInterval(timer) : start()));
   // the other three pictures load once the page is idle, after everything visible
   addEventListener('load', () => (window.requestIdleCallback || setTimeout)(() => imgs.slice(1).forEach((im) => { im.loading = 'eager'; })));
   start();
+})();
+
+// Hero film: once the page has loaded, a looping video of the same kitchens fades in over the pictures
+// (a tall cut for portrait screens, a wide one otherwise; WebM where it plays, MP4 for Safari). Skipped under
+// reduced motion or data saver; if it cannot play, the pictures keep crossfading. Paused while off screen
+// or in a background tab.
+(() => {
+  const video = document.querySelector('[data-hero-video]');
+  const ext = video?.canPlayType('video/webm; codecs="vp9"') ? 'webm' : video?.canPlayType('video/mp4; codecs="avc1.640028"') ? 'mp4' : '';
+  if (!video || !ext || reduced || navigator.connection?.saveData) return;
+  const tallScreen = matchMedia('(orientation: portrait)');
+  let onScreen = true;
+  const pick = () => `${tallScreen.matches ? video.dataset.tall : video.dataset.wide}.${ext}`;
+  const play = () => { if (onScreen && !document.hidden && video.src) video.play().catch(() => {}); };
+  const load = () => {
+    const src = pick();
+    if (video.getAttribute('src') === src) return;
+    const t = video.currentTime;
+    video.src = src;
+    video.addEventListener('loadedmetadata', () => { if (t) video.currentTime = t % video.duration; }, { once: true });
+    play();
+  };
+  video.addEventListener('playing', () => {
+    video.classList.add('is-playing');
+    document.dispatchEvent(new Event('hero:film'));
+  }, { once: true });
+  video.addEventListener('error', () => video.remove());
+  tallScreen.addEventListener?.('change', load);
+  document.addEventListener('visibilitychange', () => (document.hidden ? video.pause() : play()));
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; onScreen ? play() : video.pause(); }).observe(video);
+  }
+  addEventListener('load', () => (window.requestIdleCallback || setTimeout)(load, { timeout: 1500 }));
 })();
 
 // Layouts: pick the shape of the room, see the kitchen that fits it; the choice carries into the quote form.

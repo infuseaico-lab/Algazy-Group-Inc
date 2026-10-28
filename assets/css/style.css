@@ -153,6 +153,8 @@ main, .foot { overflow-x: clip; }
 .hero__media { position: absolute; inset: 0; z-index: -2; }
 .hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; opacity: 0; transition: opacity 1200ms ease; background: none; }
 .hero__media img.is-on { opacity: 1; }
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; opacity: 0; transition: opacity 1200ms ease; pointer-events: none; }
+.hero__video.is-playing { opacity: 1; }
 /* shade over the photo, darkest where the text sits, so white type stays readable on any of the four kitchens */
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(24 24 24 / 0.9) 0%, rgb(24 24 24 / 0.72) 45%, rgb(24 24 24 / 0.3) 80%, rgb(24 24 24 / 0.2) 100%); }
 .hero__copy { display: grid; gap: var(--space-4); width: 100%; max-width: var(--max); margin-inline: auto; padding: var(--space-9) var(--gutter) var(--space-6); }
