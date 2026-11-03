@@ -1,7 +1,9 @@
 # Netlify: hosts the portfolio copy of this site at /projects/algazy-group/
 # (proxied from infusedev.online). noindex, links absolute under the subfolder.
+# For now only the unbranded coming-soon page is live: to put the full site back,
+# delete " --coming-soon" from the build command below.
 [build]
-  command = "python3 scripts/build_portfolio.py dist"
+  command = "python3 scripts/build_portfolio.py dist --coming-soon"
   publish = "dist"
 
 [[redirects]]

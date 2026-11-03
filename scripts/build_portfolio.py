@@ -1,10 +1,13 @@
 """Build the portfolio copy of the site for Netlify (see netlify.toml).
 
-    python3 scripts/build_portfolio.py [out_dir] [--base /projects/algazy-group/]
+    python3 scripts/build_portfolio.py [out_dir] [--base /projects/algazy-group/] [--coming-soon]
 
 Copies the pages and assets to <out_dir><base> with every relative link made absolute under <base>,
 so the site works from a subfolder of infusedev.online, with or without a trailing slash.
 Adds a noindex tag so the copy stays out of search results. Standard library only.
+
+--coming-soon publishes only the unbranded holding page in coming-soon/ instead of the site, and sends
+every other address under <base> to it. The site itself is left untouched in the repository.
 """
 import posixpath
 import re
@@ -37,6 +40,9 @@ def rebase(html, base):
 def main():
     args = sys.argv[1:]
     base = BASE
+    coming_soon = "--coming-soon" in args
+    if coming_soon:
+        args.remove("--coming-soon")
     if "--base" in args:
         i = args.index("--base")
         base = "/" + args[i + 1].strip("/") + "/"
@@ -45,8 +51,15 @@ def main():
     site = out / base.strip("/")
     if out.exists():
         shutil.rmtree(out)
-    shutil.copytree(ROOT / "assets", site / "assets")
-    pages = sorted(ROOT.glob("*.html"))
+    if coming_soon:
+        src = ROOT / "coming-soon"
+        shutil.copytree(src, site, ignore=shutil.ignore_patterns("*.html"))
+        pages = sorted(src.glob("*.html"))
+        # any old link to the site (privacy.html, #quote…) lands on the holding page instead of a 404
+        (out / "_redirects").write_text(f"{base}*  {base}index.html  200\n", encoding="utf-8")
+    else:
+        shutil.copytree(ROOT / "assets", site / "assets")
+        pages = sorted(ROOT.glob("*.html"))
     for page in pages:
         (site / page.name).write_text(rebase(page.read_text(encoding="utf-8"), base), encoding="utf-8")
     print(f"wrote {len(pages)} pages to {site}")
